@@ -25,9 +25,9 @@
 		<div class="container-fluid mt-3">
 			<router-view></router-view>
 		</div>
-		<footer class="footer text-center">
-			<div class="container">
-				<span class="text-muted">Created by 1001v</span>
+		<footer>
+			<div class="text-center py-3">2018 | Created by
+				<a target="_blank" href="https://github.com/1001v"> 1001v</a>
 			</div>
 		</footer>
 	</div>
