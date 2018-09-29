@@ -90,7 +90,7 @@ module.exports = {
 			template: './src/index.html',
 			filename: isProduction ? 'index.html' : 'index.html',
 		}),
-		//new BaseHrefWebpackPlugin({ baseHref: isProduction ? 'https://1001v.github.io/webpack-generator' : '/' }),
+		new BaseHrefWebpackPlugin({ baseHref: isProduction ? 'https://1001v.github.io/webpack-generator' : '/' }),
 		new MiniCssExtractPlugin({
 			filename: '[name].[hash].css',
 			chunkFilename: 'vendor.[hash].css'
