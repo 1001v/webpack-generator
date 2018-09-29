@@ -36,7 +36,7 @@ const router = new VueRouter({
 			component: Generator
 		},
 		{
-			path: '/about',
+			path: '/project',
 			component: About
 		}
 	]
