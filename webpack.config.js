@@ -6,6 +6,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
+const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin')
 
 isProduction = process.env.NODE_ENV === 'production'
 
@@ -86,8 +87,9 @@ module.exports = {
 		}),
 		new HtmlWebpackPlugin({
 			template: './src/index.html',
-			filename: isProduction ? '404.html' : 'index.html'
+			filename: isProduction ? 'index.html' : 'index.html',
 		}),
+		new BaseHrefWebpackPlugin({ baseHref: isProduction ? '/webpack-generator' : '/' }),
 		new MiniCssExtractPlugin({
 			filename: '[name].[hash].css',
 			chunkFilename: 'vendor.[hash].css'
