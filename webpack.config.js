@@ -9,6 +9,7 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin')
 
 isProduction = process.env.NODE_ENV === 'production'
+baseUrl = 'https://1001v.github.io/webpack-generator'
 
 module.exports = {
 	entry: !isProduction ? './src/index.js' : ['@babel/polyfill', './src/index.js'],
@@ -33,7 +34,7 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname, isProduction ? 'docs': 'dist'),
 		filename: `[name]${isProduction ? '' : ''}.js`,
-		publicPath: isProduction ? 'https://1001v.github.io/webpack-generator/' : ''
+		publicPath: isProduction ? baseUrl : ''
 	},
 	devServer: {
 		contentBase: './dist',
@@ -89,9 +90,10 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: './src/index.html',
 			filename: isProduction ? '404.html' : 'index.html',
-			hash: true
+			hash: true,
+			favicon: './docs/favicon.ico'
 		}),
-		new BaseHrefWebpackPlugin({ baseHref: isProduction ? 'https://1001v.github.io/webpack-generator' : '/' }),
+		new BaseHrefWebpackPlugin({ baseHref: isProduction ? baseUrl : '/' }),
 		new MiniCssExtractPlugin({
 			filename: '[name].css',
 			chunkFilename: 'vendor.css'
