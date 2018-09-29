@@ -10,7 +10,7 @@
 
 				<b-navbar-nav>
 					<b-nav-item to="/generator">{{$t('header.generatorPage')}}</b-nav-item>
-					<b-nav-item to="/project">{{$t('header.aboutPage')}}</b-nav-item>
+					<b-nav-item to="/about">{{$t('header.aboutPage')}}</b-nav-item>
 				</b-navbar-nav>
 
 				<b-navbar-nav class="ml-auto">
