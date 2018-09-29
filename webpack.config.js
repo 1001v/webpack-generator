@@ -32,7 +32,7 @@ module.exports = {
 	devtool: isProduction ? '' : 'source-map',
 	output: {
 		path: path.resolve(__dirname, isProduction ? 'docs': 'dist'),
-		filename: `[name]${isProduction ? '.[hash]' : ''}.js`,
+		filename: `[name]${isProduction ? '' : ''}.js`,
 		publicPath: isProduction ? 'https://1001v.github.io/webpack-generator/' : ''
 	},
 	devServer: {
@@ -89,11 +89,12 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: './src/index.html',
 			filename: isProduction ? '404.html' : 'index.html',
+			hash: true
 		}),
 		new BaseHrefWebpackPlugin({ baseHref: isProduction ? 'https://1001v.github.io/webpack-generator' : '/' }),
 		new MiniCssExtractPlugin({
-			filename: '[name].[hash].css',
-			chunkFilename: 'vendor.[hash].css'
+			filename: '[name].css',
+			chunkFilename: 'vendor.css'
 		}),
 		new VueLoaderPlugin()
 	]
