@@ -88,7 +88,7 @@ module.exports = {
 		}),
 		new HtmlWebpackPlugin({
 			template: './src/index.html',
-			filename: isProduction ? 'index.html' : 'index.html',
+			filename: isProduction ? '404.html' : 'index.html',
 		}),
 		new BaseHrefWebpackPlugin({ baseHref: isProduction ? 'https://1001v.github.io/webpack-generator' : '/' }),
 		new MiniCssExtractPlugin({
