@@ -38,8 +38,8 @@ export default {
 			entrySrcPopover: 'Точка входа задает модуль, с которого webpack начинает сборку вашего проекта',
 			outputDirPopover: 'Папка назначения задает место, куда webpack поместит сгенерированные бандлы',
 			bundleNamePopover: 'Имя бандла указывает, как будет назван собранный бандл',
-			sourceMap: 'Source map',
-			sourceMapPopover: 'Эта опция указывает, генерятся ли source maps. На самом деле существует несколько типов source maps, которые можно указать в данной опции, поэтому ознакомьтесь с документацией webpack',
+			sourceMap: 'Sourcemaps',
+			sourceMapPopover: 'Эта опция указывает, генерятся ли sourcemaps. На самом деле существует несколько типов sourcemaps, которые можно указать в данной опции, поэтому ознакомьтесь с документацией webpack',
 			hash: 'Hash',
 			hashPopover: 'Внедрить уникальный хэш в имя выходного файла. Используйте эту опцию при сборке production билда',
 			watch: 'Watch',
@@ -54,6 +54,7 @@ export default {
 			vendorBundlePopover: 'Поместить все модули, импортированные из node_modules, в отдельные бандлы (включая css)',
 			uglify: 'Сократить код',
 			uglifyPopover: 'Сократить и изуродовать код для меньшего размера бандла',
+			uglifyDisabled: 'Нет нужды включать эту опцию, когда установлен production mode',
 
 			htmlInject: 'Автовставка в index.html',
 			htmlInjectPopover: 'Включение этой опции позволит webpack автоматически вставлять ссылки на все сгенерированные бандлы в ваш index.html. Вы также должны указать путь к вашему index.html шаблону. Просмотрите документацию HTML Webpack Plugin для дополнительной информации',
@@ -70,12 +71,12 @@ export default {
 			enableCssExtractPopover: 'Извлечь CSS в отдельный .css бандл. Также создается отдельный бандл с вендорным css, если включена соответствующая опция в секции Общее',
 			enableCssSM: 'CSS sourcemaps',
 			enableCssSMPopover: 'Создавать sourcemaps для CSS',
-			enableCssSMWarning: 'Эта опция требует включения опции Source map в секции Общее',
+			enableCssSMWarning: 'Если вы используете опцию Извлечь CSS, но не используете опцию Включить сжатие CSS, то для появления sourcemaps вы должны включить опцию Sourcemaps в секции JS (что приведет к генерации sourcemaps для js) ¯\\_(ツ)_/¯',
 			cssPp: 'CSS препроцессор',
 			cssPpPopover: 'Добавить поддержку препроцессора CSS',
 
 			ts: 'Typescript',
-			tsPopover: 'Включить поддержку Typescript',
+			tsPopover: 'Включить поддержку Typescript. Не забудьте скачать tsconfig.json',
 			transform: 'Преобразовать в ES5',
 			transformPopover: 'Преобразовывает новейший синтаксис javascript в ES5. Обратите внимание, что данная опция работает по-другому при использовании typescript (typescript не требует babel для состаривания кода)'
 		}

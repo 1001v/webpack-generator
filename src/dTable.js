@@ -8,6 +8,7 @@ export default {
 	'mini-css-extract-plugin': 'MiniCssExtractPlugin',
 	'uglifyjs-webpack-plugin': 'UglifyJsPlugin',
 	'optimize-css-assets-webpack-plugin': 'OptimizeCSSAssetsPlugin',
-	'clean-webpack-plugin': 'CleanWebpackPlugin'
+	'clean-webpack-plugin': 'CleanWebpackPlugin',
+	'terser-webpack-plugin': 'TerserPlugin'
 
 }

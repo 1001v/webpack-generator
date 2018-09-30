@@ -28,24 +28,24 @@ Vue.use(VueClipboards)
 const router = new VueRouter({
 	mode: 'history',
 	routes: [{
-			path: '*',
-			redirect: '/generator'
-		},
-		{
-			path: '/generator',
-			component: Generator
-		},
-		{
-			path: '/about',
-			component: About
-		}
+		path: '*',
+		redirect: '/generator'
+	},
+	{
+		path: '/generator',
+		component: Generator
+	},
+	{
+		path: '/about',
+		component: About
+	}
 	]
 })
 
 
 let locale = localStorage.getItem('locale') || (navigator.language || navigator.userLanguage || 'en-US').split('-')[0]
 
-if (! Object.keys(locales).includes(locale)) {
+if (!Object.keys(locales).includes(locale)) {
 	locale = 'en'
 }
 

@@ -38,8 +38,8 @@ export default {
 			entrySrcPopover: 'An entry point indicates which module webpack should use to begin building your project',
 			outputDirPopover: 'The output dir property tells webpack where to emit the bundles it creates',
 			bundleNamePopover: 'The bundle name property tells webpack how to name the bundle',
-			sourceMap: 'Source map',
-			sourceMapPopover: 'This option controls if source maps are generated. There are actually several different types of source maps, which you can specify in this option, so check out webpack docs',
+			sourceMap: 'Sourcemaps',
+			sourceMapPopover: 'This option controls if sourcemaps are generated. There are actually several different types of sourcemaps, which you can specify in this option, so check out webpack docs',
 			hash: 'Hash',
 			hashPopover: 'Insert the unique hash in output filename. Use this when you make production build',
 			watch: 'Watch',
@@ -54,6 +54,7 @@ export default {
 			vendorBundlePopover: 'Put all modules imported from node_modules to the separate bundles (including css)',
 			uglify: 'Uglify code',
 			uglifyPopover: 'Minify and uglify code for less bundle size',
+			uglifyDisabled: 'You don\'t need to enable this when production mode is set',
 
 			htmlInject: 'Autoinject to index.html',
 			htmlInjectPopover: 'This option controls if webpack generates index.html file with all compiled bundles automatically. You should also provide path to your index.html template. Please check out HTML Webpack Plugin docs for more info and features',
@@ -70,12 +71,12 @@ export default {
 			enableCssExtractPopover: 'Extract CSS to separate .css bundle. The separate vendor bundle will be created if option Vendor bundle is enabled in Main section',
 			enableCssSM: 'CSS sourcemaps',
 			enableCssSMPopover: 'Generate sourcemaps for CSS',
-			enableCssSMWarning: 'This option requires to enable Source map option in Main section',
+			enableCssSMWarning: 'If you use Extract CSS option, but don\'t use Minify CSS option, you need to enable Sourcemaps option in JS section to make sourcemaps be generated (this will cause js sourcemaps to be generated too) ¯\\_(ツ)_/¯',
 			cssPp: 'CSS preprocessor',
 			cssPpPopover: 'Add CSS preprocessor support',
 
 			ts: 'Typescript',
-			tsPopover: 'Enable Typescript support',
+			tsPopover: 'Enable Typescript support. Don\'t forget to download tsconfig.json',
 			transform: 'Transform to ES5',
 			transformPopover: 'Transforms your code from latest javascript syntax to ES5. Note that this option works differently if you enable typescript support (typescript doesn\'t use babel to transform your code to ES5)'
 		}
