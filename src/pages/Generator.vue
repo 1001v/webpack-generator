@@ -205,7 +205,7 @@ export default {
 			let blob = new Blob([this.webpackConfig], {
 				type: 'text/plain;charset=utf-8'
 			})
-			saveAs(blob, 'tsconfig.json')
+			saveAs(blob, 'webpack.config.js')
 		},
 
 		saveTsConfig() {
