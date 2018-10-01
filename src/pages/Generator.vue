@@ -91,9 +91,13 @@
 					<highlight-code lang="javascript">{{webpackConfig}}</highlight-code>
 				</div>
 				<div class="card-footer text-center">
-					<b-button-group class="mb-2">
-						<b-button @click="saveFile()" variant="outline-primary">{{$t('generatorPage.saveFile')}}</b-button>
-						<b-button v-clipboard="webpackConfig" @click="alertCountdown = 2" variant="outline-primary">{{$t('generatorPage.copyFile')}}</b-button>
+					<b-button-group class="mb-2 d-flex px-5">
+						<b-button class="w-100" @click="saveFile()" variant="outline-primary">{{$t('generatorPage.saveFile')}}</b-button>
+						<b-button class="w-100" v-clipboard="webpackConfig" @click="alertCountdown = 2" variant="outline-primary">{{$t('generatorPage.copyFile')}}</b-button>
+					</b-button-group>
+					<b-button-group class="mb-2 d-flex px-5">
+						<b-button class="w-100" v-if="js.ts" @click="saveTsConfig()" variant="outline-primary">{{$t('generatorPage.saveTsConfig')}}</b-button>
+						<b-button class="w-100" v-if="js.ts" v-clipboard="tsConfig" @click="alertCountdown = 2" variant="outline-primary">{{$t('generatorPage.copyTsConfig')}}</b-button>
 					</b-button-group>
 					<b-alert fade :show="alertCountdown" dismissible variant="success" @dismissed="alertCountdown = 0"
 					@dismiss-count-down="countdown => alertCountdown = countdown">{{$t('generatorPage.copied')}}!</b-alert>

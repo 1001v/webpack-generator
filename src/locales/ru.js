@@ -16,8 +16,10 @@ export default {
 			webpackdocs: 'Документация по webpack',
 			esmodules: 'О ES модулях'
 		},
-		saveFile: 'Сохранить файл',
-		copyFile: 'Скопировать в буфер обмена',
+		saveFile: 'Сохранить webpack.config.js',
+		copyFile: 'Скопировать webpack.config.js',
+		saveTsConfig: 'Сохранить tsconfig.json',
+		copyTsConfig: 'Скопировать tsconfig.json',
 		copied: 'Скопировано',
 		downloadYour: 'Скачайте ваш',
 		andPlaceIt: 'и поместите его рядом с package.json вашего проекта.',

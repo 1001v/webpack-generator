@@ -16,8 +16,10 @@ export default {
 			webpackdocs: 'Webpack documentation',
 			esmodules: 'About ES modules'
 		},
-		saveFile: 'Save file',
-		copyFile: 'Copy to clipboard',
+		saveFile: 'Save webpack.config.js',
+		copyFile: 'Copy webpack.config.js',
+		saveTsConfig: 'Save tsconfig.json',
+		copyTsConfig: 'Copy tsconfig.json',
 		copied: 'Copied',
 		downloadYour: 'Download your',
 		andPlaceIt: 'and place it with your project`s package.json.',
