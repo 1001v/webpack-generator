@@ -8,8 +8,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin')
 
-isProduction = process.env.NODE_ENV === 'production'
-baseUrl = 'https://1001v.github.io/webpack-generator'
+const isProduction = process.env.NODE_ENV === 'production'
+const baseUrl = 'https://1001v.github.io/webpack-generator'
 
 module.exports = {
 	entry: !isProduction ? './src/index.js' : ['@babel/polyfill', './src/index.js'],
