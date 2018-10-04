@@ -312,7 +312,7 @@
 							},`
 		: ''
 }			${this.rules ? `module: {rules: [${this.rules}]},` : ''}
-						${this.resolve.length > 1 ? `resolve: { extensions: [${this.resolve.join(',')}] },` : ''}
+						${this.resolve.length > 2 ? `resolve: { extensions: [${this.resolve.join(',')}] },` : ''}
 						${this.plugins ? `plugins: [\n ${this.plugins} ]` : ''}
 					};`, {
 						max_preserve_newlines: 1
