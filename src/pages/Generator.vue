@@ -75,8 +75,8 @@
 							<o-checkbox v-model="js.transform" :name="$t('generatorPage.settings.transform')" :popover="$t('generatorPage.settings.transformPopover')" />
 							<o-checkbox v-model="js.ts" :name="$t('generatorPage.settings.ts')" :popover="$t('generatorPage.settings.tsPopover')" />
 						</b-tab>
-						<b-tab v-if="false" :title="$t('generatorPage.tabs.frameworks')" disabled>
-							<br>Disabled tab!
+						<b-tab :title="$t('generatorPage.tabs.frameworks')">
+							<o-checkbox v-model="fm.vue" :name="$t('generatorPage.settings.vue')" :popover="$t('generatorPage.settings.vuePopover')" />
 						</b-tab>
 					</b-tabs>
 				</div>
@@ -200,6 +200,9 @@ export default {
 			js: {
 				transform: false,
 				ts: false
+			},
+			fm: {
+				vue: false
 			}
 		}
 	},
@@ -293,7 +296,7 @@ export default {
 							},`
 		: ''
 }			${this.rules ? `module: {rules: [${this.rules}]},` : ''}
-						${this.resolve ? `resolve: { extensions: [${this.resolve}] },` : ''}
+						${this.resolve.length > 1 ? `resolve: { extensions: [${this.resolve.join(',')}] },` : ''}
 						${this.plugins ? `plugins: [\n ${this.plugins} ]` : ''}
 					};`,
 				{
@@ -334,7 +337,8 @@ export default {
       						"outDir": "${this.outputDir}",
 						    ${this.sourceMap ? '"sourceMap": true,' : ''}
       						"noImplicitAny": true,
-      						"module": "commonjs",
+									"module": "commonjs",
+									${this.fm.vue ? '"experimentalDecorators": true,': ''}
       						"target": ${this.js.transform ? '"ES5"' : '"ESNext"'},
       						"allowJs": true
     						}
@@ -346,12 +350,15 @@ export default {
 		},
 
 		resolve() {
-			let list = []
+			let list = ['\'.js\'']
 			if (this.js.ts) {
-				list.push('\'.ts\'', '\'.js\'')
+				list.push('\'.ts\'')
+			}
+			if (this.fm.vue) {
+				list.push('\'.vue\'')
 			}
 
-			return Array.from(new Set(list)).join(',')
+			return Array.from(new Set(list))
 		},
 
 		dependencies() {
@@ -394,6 +401,15 @@ export default {
 			if (this.js.transform && !this.js.ts) {
 				list.push('babel-loader', '@babel/core', '@babel/preset-env')
 			}
+			if (this.fm.vue) {
+				list.push('vue-loader', 'vue-template-compiler')
+				if (this.css.enable) {
+					list.push('vue-style-loader')
+				}
+				if (this.js.ts) {
+					list.push('vue-class-component', 'vue-property-decorator')
+				}
+			}
 			return Array.from(new Set(list))
 		},
 
@@ -417,6 +433,9 @@ export default {
 			if (this.css.enable && this.css.extract) {
 				list.push('mini-css-extract-plugin')
 			}
+			if (this.fm.vue) {
+				list.push('vue-loader')
+			}
 			return Array.from(new Set(list))
 				.map(i => `const ${dTable[i]} = require('${i}');`)
 				.join('')
@@ -430,7 +449,7 @@ export default {
 						test: ${this.cssRegex},
 						use: [
 							{ 
-								loader: ${this.css.extract ? 'MiniCssExtractPlugin.loader' : '\'style-loader\''}
+								loader: ${this.css.extract ? 'MiniCssExtractPlugin.loader' : (this.fm.vue ? '\'vue-style-loader\'' : '\'style-loader\'')}
 								${
 	this.css.sourceMap && this.cssSMAvailable && !this.css.extract
 		? ', options: { sourceMap: true }'
@@ -465,8 +484,8 @@ export default {
 				list.push(
 					`{
           				test: /\.ts$/,
-          				use: 'ts-loader',
-          				exclude: /node_modules/
+									use: ${this.fm.vue ? '[ {loader: \'ts-loader\', options: { appendTsSuffixTo: [/\.vue$/] }}]' : '\'ts-loader\''},
+									exclude: /node_modules/
         			}`
 				)
 			}
@@ -484,6 +503,13 @@ export default {
     				}`
 				)
 			}
+			if (this.fm.vue) {
+				list.push(`{
+        	test: /\.vue$/,
+        	loader: 'vue-loader'
+      	}`)
+			}
+
 			return list.join(',')
 		},
 
@@ -518,6 +544,9 @@ export default {
 					})
 					`
 				)
+			}
+			if (this.fm.vue) {
+				list.push('new VueLoaderPlugin()')
 			}
 			return Array.from(new Set(list)).join(',\n')
 		},

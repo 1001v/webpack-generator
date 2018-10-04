@@ -9,6 +9,7 @@ export default {
 	'uglifyjs-webpack-plugin': 'UglifyJsPlugin',
 	'optimize-css-assets-webpack-plugin': 'OptimizeCSSAssetsPlugin',
 	'clean-webpack-plugin': 'CleanWebpackPlugin',
-	'terser-webpack-plugin': 'TerserPlugin'
+	'terser-webpack-plugin': 'TerserPlugin',
+	'vue-loader': '{ VueLoaderPlugin }'
 
 }

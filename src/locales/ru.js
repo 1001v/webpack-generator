@@ -80,7 +80,10 @@ export default {
 			ts: 'Typescript',
 			tsPopover: 'Включить поддержку Typescript. Не забудьте скачать tsconfig.json',
 			transform: 'Преобразовать в ES5',
-			transformPopover: 'Преобразовывает новейший синтаксис javascript в ES5. Обратите внимание, что данная опция работает по-другому при использовании typescript (typescript не требует babel для состаривания кода)'
+			transformPopover: 'Преобразовывает новейший синтаксис javascript в ES5. Обратите внимание, что данная опция работает по-другому при использовании typescript (typescript не требует babel для состаривания кода)',
+		
+			vue: 'Поддержка Vue.js',
+			vuePopover: 'Позволяет создавать компоненты Vue в формате Single-File Components. Не забудьте включить поддержку CSS если хотите использовать <style> секцию в Vue компонентах. Эта опция совместима с Typescript'
 		}
 	},
 	message: {
