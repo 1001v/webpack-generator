@@ -82,9 +82,15 @@ export default {
 			transform: 'Transform to ES5',
 			transformPopover: 'Transforms your code from latest javascript syntax to ES5. Note that this option works differently if you enable typescript support (typescript doesn\'t use babel to transform your code to ES5)',
 
+			jsx: 'Enable jsx',
+			jsxPopover: 'Enable jsx/tsx modules support. Note that you need to enable Typescript if you want to use tsx',
+
 
 			vue: 'Vue.js support',
-			vuePopover: 'Allows you to author Vue components in a format called Single-File Components. Don\'t forget to enable CSS support option if you want to use <style> section in Vue components. This option is compatible with Typescript support'
+			vuePopover: 'Allows you to author Vue components in a format called Single-File Components. Don\'t forget to enable CSS support option if you want to use <style> section in Vue components. This option is compatible with Typescript support',
+
+			react: 'React support',
+			reactPopover: 'Enables React support. This is an alias to Enable jsx option. This option is compatible with Typescript support',
 		}
 	},
 	message: {

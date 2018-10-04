@@ -73,10 +73,12 @@
 							<o-checkbox v-model="sourceMap" :name="$t('generatorPage.settings.sourceMap')" :popover="$t('generatorPage.settings.sourceMapPopover')" />
 							<o-checkbox :warning="$t('generatorPage.settings.uglifyDisabled')" :disabled="mode === 'production'" v-model="uglify" :name="$t('generatorPage.settings.uglify')" :popover="$t('generatorPage.settings.uglifyPopover')" />
 							<o-checkbox v-model="js.transform" :name="$t('generatorPage.settings.transform')" :popover="$t('generatorPage.settings.transformPopover')" />
+							<o-checkbox v-model="js.jsx" :name="$t('generatorPage.settings.jsx')" :popover="$t('generatorPage.settings.jsxPopover')" />
 							<o-checkbox v-model="js.ts" :name="$t('generatorPage.settings.ts')" :popover="$t('generatorPage.settings.tsPopover')" />
 						</b-tab>
 						<b-tab :title="$t('generatorPage.tabs.frameworks')">
 							<o-checkbox v-model="fm.vue" :name="$t('generatorPage.settings.vue')" :popover="$t('generatorPage.settings.vuePopover')" />
+							<o-checkbox v-model="js.jsx" :name="$t('generatorPage.settings.react')" :popover="$t('generatorPage.settings.reactPopover')" />
 						</b-tab>
 					</b-tabs>
 				</div>
@@ -199,7 +201,8 @@ export default {
 			},
 			js: {
 				transform: false,
-				ts: false
+				ts: false,
+				jsx: false
 			},
 			fm: {
 				vue: false
@@ -335,11 +338,12 @@ export default {
 				`{
     					"compilerOptions": {
       						"outDir": "${this.outputDir}",
-						    ${this.sourceMap ? '"sourceMap": true,' : ''}
+						    	${this.sourceMap ? '"sourceMap": true,' : ''}
       						"noImplicitAny": true,
 									"module": "commonjs",
-									${this.fm.vue ? '"experimentalDecorators": true,': ''}
-      						"target": ${this.js.transform ? '"ES5"' : '"ESNext"'},
+									"experimentalDecorators": true,
+									"target": ${this.js.transform ? '"ES5"' : '"ESNext"'},
+									${this.js.jsx ? '"jsx": "react",' : ''}
       						"allowJs": true
     						}
   						}`,
@@ -350,9 +354,15 @@ export default {
 		},
 
 		resolve() {
-			let list = ['\'.js\'']
+			let list = ['\'.js\'', '\'.json\'']
+			if (this.js.jsx) {
+				list.push('\'.jsx\'')
+			}
 			if (this.js.ts) {
 				list.push('\'.ts\'')
+				if (this.js.jsx) {
+					list.push('\'.tsx\'')
+				}
 			}
 			if (this.fm.vue) {
 				list.push('\'.vue\'')
@@ -397,9 +407,21 @@ export default {
 			}
 			if (this.js.ts) {
 				list.push('typescript', 'ts-loader')
+				if (this.js.jsx) {
+					list.push('@types/react')
+				}
+				if (this.fm.vue) {
+					list.push('@types/vue')
+				}
 			}
-			if (this.js.transform && !this.js.ts) {
-				list.push('babel-loader', '@babel/core', '@babel/preset-env')
+			if ((this.js.transform || this.js.jsx) && !this.js.ts) {
+				list.push('babel-loader', '@babel/core')
+				if (this.js.transform) {
+					list.push('@babel/preset-env')
+				} 
+				if (this.js.jsx) {
+					list.push('@babel/preset-react')
+				}
 			}
 			if (this.fm.vue) {
 				list.push('vue-loader', 'vue-template-compiler')
@@ -483,21 +505,28 @@ export default {
 			if (this.js.ts) {
 				list.push(
 					`{
-          				test: /\.ts$/,
+          				test: /\.ts${this.js.jsx ? 'x?' : ''}$/,
 									use: ${this.fm.vue ? '[ {loader: \'ts-loader\', options: { appendTsSuffixTo: [/\.vue$/] }}]' : '\'ts-loader\''},
 									exclude: /node_modules/
         			}`
 				)
 			}
-			if (this.js.transform && !this.js.ts) {
+			if ((this.js.transform || this.js.jsx) && !this.js.ts) {
+				let presets = []
+				if (this.js.transform) {
+					presets.push('\'@babel/preset-env\'')
+				} 
+				if (this.js.jsx) {
+					presets.push('\'@babel/preset-react\'')
+				}
 				list.push(
 					`{
-      					test: /\.js$/,
+      					test: /\.js${this.js.jsx ? 'x?' : ''}$/,
       					exclude: /node_modules/,
       					use: {
         					loader: 'babel-loader',
         					options: {
-          						presets: ['@babel/preset-env']
+          						presets: [${presets.join(',')}]
         					}
       					}
     				}`
